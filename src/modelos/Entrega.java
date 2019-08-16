@@ -9,8 +9,8 @@ package modelos;
  *
  * @author jaime
  */
-class Entrega {
-    //De aqui debemos eredar las entregas , realcionarlas con lo que queda , creo que debemos corregir algo , mañana hay que hablarlo
+public class Entrega {
+    //De aqui debemos heredar las entregas , realcionarlas con lo que queda , creo que debemos corregir algo , mañana hay que hablarlo
     private String direccion; 
     private boolean isExitosa;
     private boolean enable; 

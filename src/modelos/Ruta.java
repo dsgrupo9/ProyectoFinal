@@ -11,7 +11,8 @@ import java.util.LinkedList;
  *
  * @author jaime
  */
-class Ruta {
+public class Ruta {
+    
     private LinkedList<Entrega> rutas;
     private boolean enable; 
 
