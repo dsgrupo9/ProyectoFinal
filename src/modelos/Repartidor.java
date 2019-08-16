@@ -12,7 +12,9 @@ import java.util.LinkedList;
  * @author jaime
  */
 public class Repartidor extends Empleado{
-    protected LinkedList<Ruta> rutasDeEntrega;
+    
+    //protected LinkedList<Ruta> rutasDeEntrega;
+    protected Ruta rutaDeEntrega;
     protected int entregasRealizadas; 
     protected boolean isDisponible ; 
     protected boolean enable;
@@ -20,20 +22,29 @@ public class Repartidor extends Empleado{
 
     public Repartidor(String nombre, String cedula, String telefono, String direccion, double sueldo) {
         super(nombre, cedula, telefono, direccion, sueldo);
-        this.rutasDeEntrega = new LinkedList<>();
+        this.rutaDeEntrega = null;
         this.entregasRealizadas=0;
         this.isDisponible=true;
         this.enable=true;
     }
 
-    public LinkedList<Ruta> getRutasDeEntrega() {
-        return rutasDeEntrega;
+//    public LinkedList<Ruta> getRutasDeEntrega() {
+//        return rutasDeEntrega;
+//    }
+//
+//    public void setRutasDeEntrega(LinkedList<Ruta> rutasDeEntrega) {
+//        this.rutasDeEntrega = rutasDeEntrega;
+//    }
+
+    public Ruta getRutaDeEntrega() {
+        return rutaDeEntrega;
     }
 
-    public void setRutasDeEntrega(LinkedList<Ruta> rutasDeEntrega) {
-        this.rutasDeEntrega = rutasDeEntrega;
+    public void setRutaDeEntrega(Ruta rutaDeEntrega) {
+        this.rutaDeEntrega = rutaDeEntrega;
     }
-
+    
+    
     public int getEntregasRealizadas() {
         return entregasRealizadas;
     }

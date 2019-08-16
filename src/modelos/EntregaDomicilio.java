@@ -9,11 +9,13 @@ package modelos;
  *
  * @author Melanie Banchon
  */
-public class EntregaLocal extends Entrega {
+public class EntregaDomicilio extends Entrega {
     
-    private PeticionAbastecimiento pedido;
+    private Venta venta;
+    private Cliente cliente;
     
-    public EntregaLocal(String direccion) {
+    
+    public EntregaDomicilio(String direccion) {
         super(direccion);
     }
     

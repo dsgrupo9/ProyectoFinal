@@ -9,7 +9,7 @@ package modelos;
  *
  * @author jaime
  */
-class Producto {
+public class Producto {
     private String nombre;
     private int id;
     private boolean isBodega;

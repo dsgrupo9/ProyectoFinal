@@ -3,18 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelos;
+package modelos.strategy;
 
 /**
  *
  * @author Melanie Banchon
  */
-public class EntregaLocal extends Entrega {
+public abstract class MetodoPago {
+ 
+    protected Pago pago;
     
-    private PeticionAbastecimiento pedido;
-    
-    public EntregaLocal(String direccion) {
-        super(direccion);
-    }
+    abstract void generarPago();
     
 }

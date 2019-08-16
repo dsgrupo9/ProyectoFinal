@@ -10,6 +10,7 @@ package modelos;
  * @author jaime
  */
 public class Empleado extends Persona {
+    
     protected double sueldo; 
     protected boolean enable;
     

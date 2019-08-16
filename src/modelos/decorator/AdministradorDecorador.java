@@ -3,18 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelos;
+package modelos.decorator;
+
+import modelos.Usuario;
 
 /**
  *
  * @author Melanie Banchon
  */
-public class EntregaLocal extends Entrega {
+public abstract class AdministradorDecorador {
     
-    private PeticionAbastecimiento pedido;
+    protected Usuario usuarioAdministrador;
+   
     
-    public EntregaLocal(String direccion) {
-        super(direccion);
+    public void delegarPrivilegios(){
+        
     }
-    
 }

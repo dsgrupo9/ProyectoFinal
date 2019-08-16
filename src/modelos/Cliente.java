@@ -10,9 +10,11 @@ package modelos;
  * @author jaime
  */
 public class Cliente extends Persona {
+    
     protected String ruc;
     protected boolean credito; 
     protected boolean enable;
+    
     public Cliente(String nombre, String cedula, String telefono, String direccion) {
         super(nombre, cedula, telefono, direccion);
     }

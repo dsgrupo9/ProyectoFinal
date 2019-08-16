@@ -10,22 +10,24 @@ package modelos;
  * @author jaime
  */
 public class Usuario extends Empleado{
-    protected String usiuario; 
+    
+    protected String usuario; 
     protected String password;
     protected boolean enable;
+    
     public Usuario(String nombre, String cedula, String telefono, String direccion, double sueldo) {
         super(nombre, cedula, telefono, direccion, sueldo);
-        this.usiuario="";
+        this.usuario="";
         this.password="";
         
     }
 
     public String getUsiuario() {
-        return usiuario;
+        return usuario;
     }
 
-    public void setUsiuario(String usiuario) {
-        this.usiuario = usiuario;
+    public void setUsiuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getPassword() {

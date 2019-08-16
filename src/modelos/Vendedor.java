@@ -10,8 +10,10 @@ package modelos;
  * @author jaime
  */
 public class Vendedor extends Usuario{
+    
     protected Localidad localidad;
     protected boolean enable;
+    
     public Vendedor(String nombre, String cedula, String telefono, String direccion, double sueldo) {
         super(nombre, cedula, telefono, direccion, sueldo);
         this.localidad=null;

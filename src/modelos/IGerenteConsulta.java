@@ -10,10 +10,11 @@ package modelos;
  * @author jaime
  */
 public interface IGerenteConsulta {
-    Usuario consultarUsuario();
-    Entrega consultarEnvio();
-    Producto consultarProducto();
-    Venta consultarVenta();
+    
+    void consultarUsuario();
+    void consultarEnvio();
+    void consultarProducto();
+    void consultarVenta();
     
     
   

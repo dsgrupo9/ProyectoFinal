@@ -10,8 +10,10 @@ package modelos;
  * @author jaime
  */
 public class Gerente extends Usuario implements IGerenteConsulta {
+    
     protected Localidad localidad;
     protected boolean enable;
+    
     public Gerente(String nombre, String cedula, String telefono, String direccion, double sueldo) {
         super(nombre, cedula, telefono, direccion, sueldo);
         this.enable=true;
@@ -37,24 +39,24 @@ public class Gerente extends Usuario implements IGerenteConsulta {
     
     
 
-    public Usuario consultarUsuario() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void consultarUsuario() {
+        System.out.println("Implentacion en construccion");
     }
 
-    public Entrega consultarEnvio() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void consultarEnvio() {
+        System.out.println("Implentacion en construccion");
     }
 
-    public Producto consultarProducto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void consultarProducto() {
+        System.out.println("Implentacion en construccion");
     }
 
-    public Venta consultarVenta() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void consultarVenta() {
+        System.out.println("Implentacion en construccion");
     }
     
     public void asginarAdministrador(Usuario u){
-        System.out.println("Admin "+ u.usiuario);
+        System.out.println("Admin "+ u.usuario);
         
     }
     
