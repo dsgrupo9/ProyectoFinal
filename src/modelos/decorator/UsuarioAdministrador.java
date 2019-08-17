@@ -13,6 +13,7 @@ import modelos.Producto;
  */
 public class UsuarioAdministrador extends AdministradorDecorador{
     
+    @Override
     public void delegarPrivilegios(){
         
     }

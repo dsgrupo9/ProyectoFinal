@@ -16,7 +16,5 @@ public abstract class AdministradorDecorador {
     protected Usuario usuarioAdministrador;
    
     
-    public void delegarPrivilegios(){
-        
-    }
+    abstract void delegarPrivilegios();
 }
