@@ -29,10 +29,10 @@ public class VEntregas extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tDom = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tLoc = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         lDireccion = new javax.swing.JLabel();
         lPedido = new javax.swing.JLabel();
@@ -45,7 +45,7 @@ public class VEntregas extends javax.swing.JPanel {
         bGuardar = new javax.swing.JButton();
         bTerminar = new javax.swing.JButton();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tDom.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -56,11 +56,11 @@ public class VEntregas extends javax.swing.JPanel {
                 "Direccion", "Venta", "Cliente"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tDom);
 
         jLabel1.setText("Entregas a Domicilio");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tLoc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -71,7 +71,7 @@ public class VEntregas extends javax.swing.JPanel {
                 "Direccion", "Pedido"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tLoc);
 
         jLabel2.setText("Entregas a Local");
 
@@ -195,11 +195,11 @@ public class VEntregas extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JLabel lCliente;
     private javax.swing.JLabel lDireccion;
     private javax.swing.JLabel lPedido;
     private javax.swing.JLabel lVenta;
+    private javax.swing.JTable tDom;
+    private javax.swing.JTable tLoc;
     // End of variables declaration//GEN-END:variables
 }
