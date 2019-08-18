@@ -5,19 +5,27 @@
  */
 package modelos.decorator;
 
+import modelos.Gerente;
 import modelos.Producto;
+import modelos.Usuario;
+import modelos.IAdministrador;
 
 /**
  *
  * @author Melanie Banchon
  */
 public class UsuarioAdministrador extends AdministradorDecorador{
-    
-    @Override
-    public void delegarPrivilegios(){
-        
+
+    public UsuarioAdministrador(IAdministrador gerente){
+        super(gerente);
     }
     
+    @Override
+    public void asignarAdministrador(Usuario u) {
+        gerente.asignarAdministrador(u);
+    }
+   
+   
     public void ingresarStocks(Producto p){
         
     }
@@ -29,6 +37,11 @@ public class UsuarioAdministrador extends AdministradorDecorador{
     public void ingresarPreciosVenta(){
         
     }
-    
-    
+
+   
+    //Usuario u = new Usuario()...
+    //IGerenteConsulta igerente = new Vendedor()
+    //IGerenteConsulta usuarioAdministrador=new UusuarioAdministrador(igerente);
+    //usuarioAdministrador.asignarAdministrador(u);
+
 }

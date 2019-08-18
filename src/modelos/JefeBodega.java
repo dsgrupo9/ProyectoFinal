@@ -12,7 +12,7 @@ import java.util.Queue;
  *
  * @author jaime
  */
-public class JefeBodega extends Usuario {
+public class JefeBodega extends Usuario implements IAdministrador {
     
     protected Localidad localidad; 
     protected boolean enable;
@@ -30,33 +30,34 @@ public class JefeBodega extends Usuario {
         this.localidad = localidad;
     }
     
+    @Override
     public boolean isEnable() {
         return enable;
     }
 
+    @Override
     public void setEnable(boolean enable) {
         this.enable = enable;
     }
     
-    public Ruta crearRutaEntrega(LinkedList<Entrega> e, Queue<Repartidor> cola){
+    public Ruta crearRutaEntrega(LinkedList<Entrega> e){
         Ruta ruta = new Ruta(e);
-        while(!cola.isEmpty()){
-            Repartidor r= cola.poll();
-            if(r.isDisponible ){
-                r.setRutaDeEntrega(ruta);
-            }
-        }
         return ruta;
     }
     
-    //    public void asignarRepartidor(Queue<Repartidor> cola, Ruta ruta){
-//        while(!cola.isEmpty()){
-//            Repartidor r= cola.poll();
-//            if(r.isDisponible){
-//                r.setRutaDeEntrega(ruta);
-//            }
-//        }
-//    }
+    public void asignarRepartidor(Queue<Repartidor> cola, Ruta ruta) {
+        while (!cola.isEmpty()) {
+            Repartidor r = cola.poll();
+            if (r.isDisponible) {
+                r.setRutaDeEntrega(ruta);
+            }
+        }
+    }
+
+    @Override
+    public void asignarAdministrador(Usuario u) {
+        System.out.println("El jefe de bodega es administrador");
+    }
     
     
 }

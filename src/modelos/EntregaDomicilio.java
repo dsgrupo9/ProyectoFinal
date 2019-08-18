@@ -17,6 +17,25 @@ public class EntregaDomicilio extends Entrega {
     
     public EntregaDomicilio(String direccion) {
         super(direccion);
+        this.venta=null;
+        this.cliente=null;
     }
+
+    public Venta getVenta() {
+        return venta;
+    }
+
+    public void setVenta(Venta venta) {
+        this.venta = venta;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+    
     
 }

@@ -9,7 +9,7 @@ package modelos;
  *
  * @author jaime
  */
-public class Gerente extends Usuario implements IGerenteConsulta {
+public class Gerente extends Usuario implements IAdministrador {
     
     protected Localidad localidad;
     protected boolean enable;
@@ -54,11 +54,14 @@ public class Gerente extends Usuario implements IGerenteConsulta {
     public void consultarVenta() {
         System.out.println("Implentacion en construccion");
     }
-    
-    public void asginarAdministrador(Usuario u){
-        System.out.println("Admin "+ u.usuario);
-        
+
+    @Override
+    public void asignarAdministrador(Usuario u) {
+        System.out.println("El gerente es admnistrador");
     }
+
+    
+    
     
     
     

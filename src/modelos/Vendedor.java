@@ -9,7 +9,7 @@ package modelos;
  *
  * @author jaime
  */
-public class Vendedor extends Usuario{
+public class Vendedor extends Usuario implements IAdministrador{
     
     protected Localidad localidad;
     protected boolean enable;
@@ -63,6 +63,11 @@ public class Vendedor extends Usuario{
     
     public void emitirDocumento(Documento docu){
         System.out.println("Documento ");
+    }
+
+    @Override
+    public void asignarAdministrador(Usuario u) {
+        System.out.println("El Vendedor es administrador");
     }
     
 }

@@ -4,47 +4,45 @@
  * and open the template in the editor.
  */
 package modelos.singleton;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import com.jcraft.jsch.*;
 import java.util.Properties;
-import modelos.*;
 
 /**
  *
  * @author Melanie Banchon 
  */
 public class ConexionBaseDatos {
-    
+
     private static Connection conectar = null;
     public static Session sesion = null;
     
     private ConexionBaseDatos(){
+        
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            conectar = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/ProyectoBD?useTimezone=True&serverTimezone=UTC", "meldaban", "melaBa97");
+            conectar = DriverManager.getConnection("jdbc:mysql://192.168.0.104:3306/proyecto_diseno2?useTimezone=True&serverTimezone=UTC", "root", "root");
             System.out.println("CONECTÓOOOOOOOOO!!!");
             
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("error");
             System.out.println(e.getMessage());
         }
+        
     }
     
     public static Connection getInstance(){
         if(conectar==null){
-            conectar = ConexionBaseDatos.getConnection();
+            conectar = new ConexionBaseDatos().getConnection();
         }
         return conectar;
     }
     
     public static void serverConnection(){
         try{
-            String usuario="meldaban";
-            String contraseña="melaBa97";
-            String host="127.0.0.1";
+            String usuario="root";
+            String contraseña="root";
+            String host="192.168.0.104";
             int localport=3366;
             int remoteport=3306;
             connectionJSch(usuario,contraseña,host,localport,remoteport);    
@@ -70,7 +68,7 @@ public class ConexionBaseDatos {
     public static boolean ValidarUsuario(String Usuario, String contraseña) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conectar = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/ProyectoBD?useTimezone=True&serverTimezone=UTC", Usuario, contraseña);
+            Connection conectar = DriverManager.getConnection("jdbc:mysql://192.168.0.104:3306/proyecto_diseno2?useTimezone=True&serverTimezone=UTC", Usuario, contraseña);
             return true;
         } catch (Exception e) {
             return false;
@@ -87,5 +85,7 @@ public class ConexionBaseDatos {
 
 }
  
+     
+     
      
 
