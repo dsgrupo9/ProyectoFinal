@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 import modelos.Entrega;
+import modelos.Localidad;
 import modelos.singleton.ConexionBaseDatos;
 import vistas.jefebodega.VEntregas;
 
@@ -55,120 +56,102 @@ public class ControladorJefeBodega {
     }
     
     
-        public static DefaultTableModel MostrarEntregaLocal(){
-      String[] cols= new String[]{"Direccion","Nro Pedido"};
-       DefaultTableModel modelo= new DefaultTableModel(null, cols);
-        
-        
+     public static DefaultTableModel MostrarEntregaLocal() {
+        String[] cols = new String[]{"Direccion", "Nro Pedido"};
+        DefaultTableModel modelo = new DefaultTableModel(null, cols);
+
         Connection cn = ConexionBaseDatos.getInstance();
-        try{
-            String sql="Select e.direccion,ped.pedidoid from entrega e inner join entregalocal el  on e.entregaid = el.elid"
+        try {
+            String sql = "Select e.direccion,ped.pedidoid from entrega e inner join entregalocal el  on e.entregaid = el.elid"
                     + " inner join pedidoabastecimiento ped on el.pedido = ped.pedidoid";
-            PreparedStatement us=cn.prepareStatement(sql);
-            ResultSet res=us.executeQuery();
-            Object datos[]= new Object[2];
-            while(res.next())
-            {
-                for(int i=0; i<2; i++){
-                    
-                    datos[i]=res.getObject(i+1);
+            PreparedStatement us = cn.prepareStatement(sql);
+            ResultSet res = us.executeQuery();
+            Object datos[] = new Object[2];
+            while (res.next()) {
+                for (int i = 0; i < 2; i++) {
+
+                    datos[i] = res.getObject(i + 1);
                 }
                 modelo.addRow(datos);
             }
- 
+
             res.close();
-            
-        }
-        catch(SQLException e){
+
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             System.out.println("ERROR");
         }
         return modelo;
     }
-        
-        public static void buscarDom(String texto) {
-        String[] cols= new String[]{"Direccion","Nro Venta","Nro Cliente"};
-       DefaultTableModel modelo= new DefaultTableModel(null, cols);
-        
-        
-       
-        try{
-           String filtro= ""+texto+"_%";
-           String sql="Select e.direccion,ed.venta,v.cliente from entregadomicilio ed inner join entrega e on ed.edid = e.entregaid"
-                    + " inner join venta v on ed.venta = v.ventaid where e.direccion like"+'"'+filtro+'"';
-            PreparedStatement us=cn.prepareStatement(sql);
+
+    public static void buscarEntegaDom(String texto) {
+        String[] cols = new String[]{"Direccion", "Nro Venta", "Nro Cliente"};
+        DefaultTableModel modelo = new DefaultTableModel(null, cols);
+
+        try {
+            String filtro = "" + texto + "_%";
+            String sql = "Select e.direccion,ed.venta,v.cliente from entregadomicilio ed inner join entrega e on ed.edid = e.entregaid"
+                    + " inner join venta v on ed.venta = v.ventaid where e.direccion like" + '"' + filtro + '"';
+            PreparedStatement us = cn.prepareStatement(sql);
             us.setString(1, texto);
-            ResultSet res=us.executeQuery();
-            Object datos[]= new Object[3];
-            while(res.next())
-            {
-                datos[0]=res.getString("direccion");
-                datos[1]=res.getString("venta");
-                datos[2]=res.getString("cliente");
+            ResultSet res = us.executeQuery();
+            Object datos[] = new Object[3];
+            while (res.next()) {
+                datos[0] = res.getString("direccion");
+                datos[1] = res.getString("venta");
+                datos[2] = res.getString("cliente");
                 modelo.addRow(datos);
             }
             VEntregas.gettDom().setModel(modelo);
             res.close();
-            
-        }
-        catch(SQLException e){
+
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             System.out.println("ERROR");
         }
         //return modelo;
-     
-        
+
+
     }
         
-        public static void buscarlocal(String texto) {
-        String[] cols= new String[]{"Direccion","Nro Pedido"};
-       DefaultTableModel modelo= new DefaultTableModel(null, cols);
-        
-     
-       
-        try{
-            String filtro= ""+texto+"_%";
-           String sql="Select e.direccion,ped.pedidoid from entrega e inner join entregalocal el  on e.entregaid = el.elid"
-                    + " inner join pedidoabastecimiento ped on el.pedido = ped.pedidoid where e.direccion like"+'"'+filtro+'"';
-            PreparedStatement us=cn.prepareStatement(sql);
+    public static void buscarEntregaLocal(String texto) {
+        String[] cols = new String[]{"Direccion", "Nro Pedido"};
+        DefaultTableModel modelo = new DefaultTableModel(null, cols);
+
+        try {
+            String filtro = "" + texto + "_%";
+            String sql = "Select e.direccion,ped.pedidoid from entrega e inner join entregalocal el  on e.entregaid = el.elid"
+                    + " inner join pedidoabastecimiento ped on el.pedido = ped.pedidoid where e.direccion like" + '"' + filtro + '"';
+            PreparedStatement us = cn.prepareStatement(sql);
             us.setString(1, texto);
-            ResultSet res=us.executeQuery();
-            Object datos[]= new Object[2];
-            while(res.next())
-            {
-                datos[0]=res.getString("direccion");
-                datos[1]=res.getString("venta");
-               
+            ResultSet res = us.executeQuery();
+            Object datos[] = new Object[2];
+            while (res.next()) {
+                datos[0] = res.getString("direccion");
+                datos[1] = res.getString("venta");
+
                 modelo.addRow(datos);
             }
-            
+
             VEntregas.gettLoc().setModel(modelo);
             res.close();
-            
-        }
-        catch(SQLException e){
+
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             System.out.println("ERROR");
         }
-        
-     
-        
     }
         
-        
-        
-        
-        
-        public static String actualizarEntrega(Entrega entrega) {
+         
+    public static String actualizarEntrega(Entrega entrega) {
         String result = null;
-        
-        
+
         PreparedStatement pst = null;
         String sql = "UPDATE entrega SET direccion=? WHERE  entregaid =?";
         try {
             if (cn != null) {
                 pst = cn.prepareStatement(sql);
-                pst.setString(1,entrega.getDireccion());
+                pst.setString(1, entrega.getDireccion());
                 //pst.setString(2, clienteVo.getCliente_ID());
                 //pst.setString(2, clienteVo.getRUC());
                 pst.executeUpdate();
@@ -192,4 +175,6 @@ public class ControladorJefeBodega {
         }
         return result;
     }
+    
+    
 }

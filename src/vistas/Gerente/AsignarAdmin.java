@@ -5,6 +5,7 @@
  */
 package vistas.Gerente;
 
+import controladores.login.ControladorLogin;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -23,6 +24,8 @@ public class AsignarAdmin extends javax.swing.JPanel {
     public AsignarAdmin() {
         initComponents();
     }
+    
+    ControladorLogin ctrlLogin = new ControladorLogin();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,6 +51,7 @@ public class AsignarAdmin extends javax.swing.JPanel {
         bRestablecer = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         cBusqueda = new javax.swing.JTextField();
+        btnEliminarDatos = new javax.swing.JButton();
 
         tUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -73,12 +77,24 @@ public class AsignarAdmin extends javax.swing.JPanel {
         bIngresar.setText("Asignar Usuario");
 
         bActualizar.setText("Actualizar Datos");
+        bActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bActualizarActionPerformed(evt);
+            }
+        });
 
         bRestablecer.setText("Limpiar Campos");
 
         jLabel5.setText("Buscar");
 
         cBusqueda.setText("buscar usuario");
+
+        btnEliminarDatos.setText("Eliminar Datos");
+        btnEliminarDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarDatosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -99,18 +115,21 @@ public class AsignarAdmin extends javax.swing.JPanel {
                             .addComponent(jLabel1)
                             .addComponent(jLabel3)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(53, 53, 53)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cUsuario)
                             .addComponent(cNombre)
                             .addComponent(cCargo)
                             .addComponent(cLocal, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
-                        .addGap(83, 83, 83)
+                        .addGap(54, 54, 54)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bActualizar)
                             .addComponent(bIngresar)
-                            .addComponent(bRestablecer))))
+                            .addComponent(bRestablecer))
+                        .addGap(60, 60, 60)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(bActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEliminarDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -138,16 +157,17 @@ public class AsignarAdmin extends javax.swing.JPanel {
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(28, 28, 28))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel3)))
+                    .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bIngresar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                        .addComponent(bActualizar)
-                        .addGap(34, 34, 34)
-                        .addComponent(bRestablecer)
-                        .addGap(3, 3, 3)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(bIngresar)
+                            .addComponent(bActualizar))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(bRestablecer)
+                            .addComponent(btnEliminarDatos))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
@@ -155,11 +175,26 @@ public class AsignarAdmin extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void bActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bActualizarActionPerformed
+        if(ctrlLogin.isIsAdmin()){
+            bActualizar.setEnabled(true);
+        }else
+            bActualizar.setEnabled(false);
+    }//GEN-LAST:event_bActualizarActionPerformed
+
+    private void btnEliminarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarDatosActionPerformed
+        if(ctrlLogin.isIsAdmin()){
+            bActualizar.setEnabled(true);
+        }else
+            bActualizar.setEnabled(false);
+    }//GEN-LAST:event_btnEliminarDatosActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bActualizar;
     private javax.swing.JButton bIngresar;
     private javax.swing.JButton bRestablecer;
+    private javax.swing.JButton btnEliminarDatos;
     private javax.swing.JTextField cBusqueda;
     private javax.swing.JTextField cCargo;
     private javax.swing.JTextField cLocal;

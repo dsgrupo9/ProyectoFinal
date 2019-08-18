@@ -31,11 +31,13 @@ public class VJefeBodega extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         vEntregas1 = new vistas.jefebodega.VEntregas();
         vAsignarRuta1 = new vistas.jefebodega.VAsignarRuta();
+        vInforme1 = new vistas.jefebodega.VInforme();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTabbedPane1.addTab("Entregas", vEntregas1);
-        jTabbedPane1.addTab("tab2", vAsignarRuta1);
+        jTabbedPane1.addTab("Asignar Repartidor", vAsignarRuta1);
+        jTabbedPane1.addTab("Informe", vInforme1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -45,7 +47,7 @@ public class VJefeBodega extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -102,5 +104,6 @@ public class VJefeBodega extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private vistas.jefebodega.VAsignarRuta vAsignarRuta1;
     private vistas.jefebodega.VEntregas vEntregas1;
+    private vistas.jefebodega.VInforme vInforme1;
     // End of variables declaration//GEN-END:variables
 }

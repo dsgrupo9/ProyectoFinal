@@ -41,7 +41,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="vistas.local.VCreacion" name="vCreacion1">
+    <Component class="vistas.local.VCreacionLocales" name="vCreacion1">
     </Component>
   </SubComponents>
 </Form>

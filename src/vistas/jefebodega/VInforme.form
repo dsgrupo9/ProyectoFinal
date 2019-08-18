@@ -25,7 +25,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="btnAgregarRepartidor" alignment="0" max="32767" attributes="0"/>
                               <Component id="jCheckBox2" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -38,9 +38,9 @@
                       </Group>
                       <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="cDireccion" alignment="0" pref="229" max="32767" attributes="0"/>
-                          <Component id="cTipo" alignment="0" max="32767" attributes="0"/>
-                          <Component id="cEntrega" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtDireccion" alignment="0" pref="229" max="32767" attributes="0"/>
+                          <Component id="txtTipo" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtEntrega" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -58,24 +58,24 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jCheckBox2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButton1" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="btnAgregarRepartidor" min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" min="-2" pref="155" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cEntrega" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtEntrega" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cTipo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtTipo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="35" max="32767" attributes="0"/>
           </Group>
@@ -90,7 +90,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JList" name="jList1">
+        <Component class="javax.swing.JList" name="listaInforme">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
               <StringArray count="5">
@@ -115,7 +115,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Entrega;"/>
+        <Property name="text" type="java.lang.String" value="Entrega:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -128,19 +128,19 @@
         <Property name="text" type="java.lang.String" value="Tipo:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="cEntrega">
+    <Component class="javax.swing.JTextField" name="txtEntrega">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cEntregaActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEntregaActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="cDireccion">
+    <Component class="javax.swing.JTextField" name="txtDireccion">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cDireccionActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDireccionActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="cTipo">
+    <Component class="javax.swing.JTextField" name="txtTipo">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cTipoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTipoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox2">
@@ -151,10 +151,13 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBox2ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="btnAgregarRepartidor">
       <Properties>
         <Property name="text" type="java.lang.String" value="Agregar Repartidor"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarRepartidorActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
