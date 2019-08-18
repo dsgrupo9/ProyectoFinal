@@ -40,7 +40,7 @@ public class ControladorLogin {
         String cargo="";
         
         try{
-        sql="Select u.username,u.passwrd from, u.cargo, u.isadminis from usuario u Where u.username = '"+ usuario +"'&& u.passwrd= '"+ contrasena +"' ";
+        sql="Select u.username,u.passwrd from, u.cargo, u.isadmin from usuario u Where u.username = '"+ usuario +"'and u.passwrd= '"+ contrasena +"' ";
         sentencia_preparada = cn.prepareStatement(sql);
         resultado = sentencia_preparada.executeQuery();
         
@@ -48,7 +48,7 @@ public class ControladorLogin {
             usuario = resultado.getString("username");
             contrasena = resultado.getString("passwrd");
             cargo = resultado.getString("cargo");
-            isAdmin=resultado.getBoolean("isadminis");
+            isAdmin=resultado.getBoolean("isadmin");
             
             if(cargo.equalsIgnoreCase("jefe bodega")){
                 vistajefe.setVisible(true);
