@@ -5,6 +5,12 @@
  */
 package vistas.Gerente;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
 /**
  *
  * @author jaime
@@ -28,7 +34,7 @@ public class AsignarAdmin extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tUsuarios = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         cUsuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -40,8 +46,10 @@ public class AsignarAdmin extends javax.swing.JPanel {
         bIngresar = new javax.swing.JButton();
         bActualizar = new javax.swing.JButton();
         bRestablecer = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        cBusqueda = new javax.swing.JTextField();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -52,7 +60,7 @@ public class AsignarAdmin extends javax.swing.JPanel {
                 "Usuario ", "Nombre", "Cargo", "Localidad"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tUsuarios);
 
         jLabel1.setText("Nombre");
 
@@ -68,6 +76,10 @@ public class AsignarAdmin extends javax.swing.JPanel {
 
         bRestablecer.setText("Limpiar Campos");
 
+        jLabel5.setText("Buscar");
+
+        cBusqueda.setText("buscar usuario");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -75,7 +87,12 @@ public class AsignarAdmin extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(cBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,13 +111,20 @@ public class AsignarAdmin extends javax.swing.JPanel {
                             .addComponent(bActualizar)
                             .addComponent(bIngresar)
                             .addComponent(bRestablecer))))
-                .addContainerGap(253, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(cBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -136,6 +160,7 @@ public class AsignarAdmin extends javax.swing.JPanel {
     private javax.swing.JButton bActualizar;
     private javax.swing.JButton bIngresar;
     private javax.swing.JButton bRestablecer;
+    private javax.swing.JTextField cBusqueda;
     private javax.swing.JTextField cCargo;
     private javax.swing.JTextField cLocal;
     private javax.swing.JTextField cNombre;
@@ -144,7 +169,130 @@ public class AsignarAdmin extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private static javax.swing.JTable tUsuarios;
     // End of variables declaration//GEN-END:variables
+
+    public JButton getbActualizar() {
+        return bActualizar;
+    }
+
+    public void setbActualizar(JButton bActualizar) {
+        this.bActualizar = bActualizar;
+    }
+
+    public JButton getbIngresar() {
+        return bIngresar;
+    }
+
+    public void setbIngresar(JButton bIngresar) {
+        this.bIngresar = bIngresar;
+    }
+
+    public JButton getbRestablecer() {
+        return bRestablecer;
+    }
+
+    public void setbRestablecer(JButton bRestablecer) {
+        this.bRestablecer = bRestablecer;
+    }
+
+    public JTextField getcBusqueda() {
+        return cBusqueda;
+    }
+
+    public void setcBusqueda(JTextField cBusqueda) {
+        this.cBusqueda = cBusqueda;
+    }
+
+    public JTextField getcCargo() {
+        return cCargo;
+    }
+
+    public void setcCargo(JTextField cCargo) {
+        this.cCargo = cCargo;
+    }
+
+    public JTextField getcLocal() {
+        return cLocal;
+    }
+
+    public void setcLocal(JTextField cLocal) {
+        this.cLocal = cLocal;
+    }
+
+    public JTextField getcNombre() {
+        return cNombre;
+    }
+
+    public void setcNombre(JTextField cNombre) {
+        this.cNombre = cNombre;
+    }
+
+    public JTextField getcUsuario() {
+        return cUsuario;
+    }
+
+    public void setcUsuario(JTextField cUsuario) {
+        this.cUsuario = cUsuario;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public void setjLabel1(JLabel jLabel1) {
+        this.jLabel1 = jLabel1;
+    }
+
+    public JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    public void setjLabel2(JLabel jLabel2) {
+        this.jLabel2 = jLabel2;
+    }
+
+    public JLabel getjLabel3() {
+        return jLabel3;
+    }
+
+    public void setjLabel3(JLabel jLabel3) {
+        this.jLabel3 = jLabel3;
+    }
+
+    public JLabel getjLabel4() {
+        return jLabel4;
+    }
+
+    public void setjLabel4(JLabel jLabel4) {
+        this.jLabel4 = jLabel4;
+    }
+
+    public JLabel getjLabel5() {
+        return jLabel5;
+    }
+
+    public void setjLabel5(JLabel jLabel5) {
+        this.jLabel5 = jLabel5;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public void setjScrollPane1(JScrollPane jScrollPane1) {
+        this.jScrollPane1 = jScrollPane1;
+    }
+
+    public static JTable gettUsuarios() {
+        return tUsuarios;
+    }
+
+    public static void settUsuarios(JTable tUsuarios) {
+        AsignarAdmin.tUsuarios = tUsuarios;
+    }
+    
+
 }

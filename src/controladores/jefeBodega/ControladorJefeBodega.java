@@ -12,13 +12,15 @@ import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 import modelos.Entrega;
 import modelos.singleton.ConexionBaseDatos;
+import vistas.jefebodega.VEntregas;
 
 /**
  *
  * @author jaime
  */
-public class JefeBodegaDAO {
+public class ControladorJefeBodega {
     protected ConexionBaseDatos conexion;
+    protected static Connection cn = ConexionBaseDatos.getInstance();
     
     
     public static DefaultTableModel MostrarEntregaDomicilio(){
@@ -26,7 +28,7 @@ public class JefeBodegaDAO {
        DefaultTableModel modelo= new DefaultTableModel(null, cols);
         
         
-        Connection cn = ConexionBaseDatos.getInstance();
+        
         try{
             String sql="Select e.direccion,ed.venta,v.cliente from entregadomicilio ed inner join entrega e on ed.edid = e.entregaid"
                     + " inner join venta v on ed.venta = v.ventaid";
@@ -84,11 +86,11 @@ public class JefeBodegaDAO {
         return modelo;
     }
         
-        public static DefaultTableModel buscarDom(String texto) {
+        public static void buscarDom(String texto) {
         String[] cols= new String[]{"Direccion","Nro Venta","Nro Cliente"};
        DefaultTableModel modelo= new DefaultTableModel(null, cols);
         
-        Connection cn = ConexionBaseDatos.getInstance();
+        
        
         try{
            String filtro= ""+texto+"_%";
@@ -105,7 +107,7 @@ public class JefeBodegaDAO {
                 datos[2]=res.getString("cliente");
                 modelo.addRow(datos);
             }
- 
+            VEntregas.gettDom().setModel(modelo);
             res.close();
             
         }
@@ -113,16 +115,16 @@ public class JefeBodegaDAO {
             System.out.println(e.getMessage());
             System.out.println("ERROR");
         }
-        return modelo;
+        //return modelo;
      
         
     }
         
-        public static DefaultTableModel buscarlocal(String texto) {
+        public static void buscarlocal(String texto) {
         String[] cols= new String[]{"Direccion","Nro Pedido"};
        DefaultTableModel modelo= new DefaultTableModel(null, cols);
         
-        Connection cn = ConexionBaseDatos.getInstance();
+     
        
         try{
             String filtro= ""+texto+"_%";
@@ -139,7 +141,8 @@ public class JefeBodegaDAO {
                
                 modelo.addRow(datos);
             }
- 
+            
+            VEntregas.gettLoc().setModel(modelo);
             res.close();
             
         }
@@ -147,7 +150,7 @@ public class JefeBodegaDAO {
             System.out.println(e.getMessage());
             System.out.println("ERROR");
         }
-        return modelo;
+        
      
         
     }
@@ -159,7 +162,7 @@ public class JefeBodegaDAO {
         public static String actualizarEntrega(Entrega entrega) {
         String result = null;
         
-        Connection cn = ConexionBaseDatos.getInstance();
+        
         PreparedStatement pst = null;
         String sql = "UPDATE entrega SET direccion=? WHERE  entregaid =?";
         try {
