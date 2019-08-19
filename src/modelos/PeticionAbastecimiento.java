@@ -13,6 +13,8 @@ import java.util.LinkedList;
  */
 public class PeticionAbastecimiento {
  
+   
+    private static int idPeticionAbast;
     private int cantidad;
     private Localidad local;
     private LinkedList<Producto> listaProductos;
@@ -23,5 +25,39 @@ public class PeticionAbastecimiento {
         this.local = local;
         this.listaProductos = listaProductos;
     }
+    
+    public static int getIdPeticionAbast() {
+        return idPeticionAbast;
+    }
+
+    public void setIdPeticionAbast(int idPeticionAbast) {
+        this.idPeticionAbast = idPeticionAbast;
+    }
+
+    
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public Localidad getLocal() {
+        return local;
+    }
+
+    public void setLocal(Localidad local) {
+        this.local = local;
+    }
+
+    public LinkedList<Producto> getListaProductos() {
+        return listaProductos;
+    }
+
+    public void setListaProductos(LinkedList<Producto> listaProductos) {
+        this.listaProductos = listaProductos;
+    }
+    
     
 }

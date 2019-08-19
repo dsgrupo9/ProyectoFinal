@@ -11,7 +11,9 @@ import java.util.LinkedList;
  *
  * @author jaime
  */
-class Venta {
+public class Venta {
+    
+    private static int idVenta;
     private LinkedList<Producto> productos;
     private float total;
     private boolean isDomicilio; 
@@ -24,6 +26,14 @@ class Venta {
         this.isDomicilio = isDomicilio;
         this.cliente = cliente;
         this.enable=true;
+    }
+    
+    public static int getIdVenta() {
+        return idVenta;
+    }
+
+    public void setIdVenta(int idVenta) {
+        this.idVenta = idVenta;
     }
     
      public boolean isEnable() {

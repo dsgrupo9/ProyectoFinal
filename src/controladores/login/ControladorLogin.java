@@ -11,9 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import modelos.singleton.ConexionBaseDatos;
-import vistas.Gerente.VGerente;
+//import vistas.Gerente.VGerente;
 import vistas.jefebodega.VJefeBodega;
-import vistas.local.VLocales;
+import vistas.local.VistaLocal;
 
 /**
  *
@@ -27,8 +27,8 @@ public class ControladorLogin {
     ResultSet resultado;
     String sql;
     VJefeBodega vistajefe = new VJefeBodega();
-    VGerente vistaGerente = new VGerente();
-    VLocales vistaLocales = new VLocales();
+    //VGerente vistaGerente = new VGerente();
+    VistaLocal vistaLocales = new VistaLocal();
     private boolean isAdmin;
 
     public boolean isIsAdmin() {
@@ -54,7 +54,7 @@ public class ControladorLogin {
                 vistajefe.setVisible(true);
             }
             else if(cargo.equalsIgnoreCase("gerente")){
-                vistaGerente.setVisible(true);
+                //vistaGerente.setVisible(true);
                 vistaLocales.setVisible(true);
             }else{
                 JOptionPane.showMessageDialog(null, "Implementacion en construccion");

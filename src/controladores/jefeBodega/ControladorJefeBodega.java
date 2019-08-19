@@ -9,9 +9,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.Queue;
 import javax.swing.table.DefaultTableModel;
 import modelos.Entrega;
 import modelos.Localidad;
+import modelos.Persona;
+import modelos.PeticionAbastecimiento;
+import modelos.Repartidor;
+import modelos.Venta;
 import modelos.singleton.ConexionBaseDatos;
 import vistas.jefebodega.VEntregas;
 
@@ -21,6 +27,7 @@ import vistas.jefebodega.VEntregas;
  */
 public class ControladorJefeBodega {
     protected ConexionBaseDatos conexion;
+    private static Queue<Repartidor> cola = new LinkedList<>() ;
     protected static Connection cn = ConexionBaseDatos.getInstance();
     
     
@@ -123,7 +130,7 @@ public class ControladorJefeBodega {
             String sql = "Select e.direccion,ped.pedidoid from entrega e inner join entregalocal el  on e.entregaid = el.elid"
                     + " inner join pedidoabastecimiento ped on el.pedido = ped.pedidoid where e.direccion like" + '"' + filtro + '"';
             PreparedStatement us = cn.prepareStatement(sql);
-            us.setString(1, texto);
+            //us.setString(1, texto);
             ResultSet res = us.executeQuery();
             Object datos[] = new Object[2];
             while (res.next()) {
@@ -143,23 +150,25 @@ public class ControladorJefeBodega {
     }
         
          
-    public static String actualizarEntrega(Entrega entrega) {
+    
+    public static String ingresarEntregaLocal(Entrega entregaLoc) {
+        
         String result = null;
-
         PreparedStatement pst = null;
-        String sql = "UPDATE entrega SET direccion=? WHERE  entregaid =?";
+        String sql = "insert into entregalocal(entrega, pedido) values(?,?)"; 
         try {
             if (cn != null) {
                 pst = cn.prepareStatement(sql);
-                pst.setString(1, entrega.getDireccion());
-                //pst.setString(2, clienteVo.getCliente_ID());
-                //pst.setString(2, clienteVo.getRUC());
+                try{
+                pst.setString(1, String.valueOf(entregaLoc.getIdEntrega()));
+                pst.setString(2, String.valueOf(PeticionAbastecimiento.getIdPeticionAbast()));
                 pst.executeUpdate();
-                /*
-                if(clienteVo.isEstado()==1)
-                    result = "Cliente Habilitado con exito, ID: " + clienteVo.getRUC();
-                else if(clienteVo.isEstado()==0)
-                    result= result = "Cliente Eliminado con exito, ID: " + clienteVo.getRUC();*/
+                
+                result = "Entrega a local registrada!" ;}
+                catch(NullPointerException e){
+                    result="Datos Vacios";
+                    System.out.println("Error: "+e.getMessage());
+                }
             }
         } catch (SQLException e) {
             result = "Error durante el registro: " + e.getMessage();
@@ -169,7 +178,7 @@ public class ControladorJefeBodega {
                     cn.close();
                     pst.close();
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 result = "Error " + e;
             }
         }
@@ -177,4 +186,84 @@ public class ControladorJefeBodega {
     }
     
     
-}
+    public static String ingresarEntregaDomicilio(Entrega entregaDom) {
+        
+        String result = null;
+        PreparedStatement pst = null;
+        String sql = "insert into entregadominicilio(entrega, venta) values(?,?)"; 
+        try {
+            if (cn != null) {
+                pst = cn.prepareStatement(sql);
+                try{
+                
+                pst.setString(1, String.valueOf(entregaDom.getIdEntrega()));
+                pst.setString(2, String.valueOf(Venta.getIdVenta()));
+                pst.executeUpdate();
+                
+                result = "Entrega a domicilio registrada!" ;}
+                catch(NullPointerException e){
+                    result="Datos Vacios";
+                    System.out.println("Error: "+e.getMessage());
+                }
+            }
+        } catch (SQLException e) {
+            result = "Error durante el registro: " + e.getMessage();
+        } finally {
+            try {
+                if (cn != null) {
+                    cn.close();
+                    pst.close();
+                }
+            } catch (SQLException e) {
+                result = "Error " + e;
+            }
+        }
+        return result;
+    }
+    
+    public void cargarRepartidores(){
+         String result = null;
+        PreparedStatement pst = null;
+        String sql= "select r.repartidorid, p.nombre,p.cedula,p.telefono,p.direccion,e.sueldo from repartidor r\n" +
+        " inner join empleado e on r.empleadoid=e.empleadoid\n" +
+        " inner join persona p on e.personaid = p.personaid where disponible=true;";
+        try {
+            if (cn != null) {
+                pst = cn.prepareStatement(sql);
+                //pst.setString(1, ruc);
+                ResultSet rs = pst.executeQuery();
+                if (rs.next()) {
+                    int id = Integer.parseInt(rs.getString(0));
+                    String nombre= rs.getString(1);
+                    String cedula = rs.getString(2);
+                    String telefono= rs.getString(3);
+                    String direc= rs.getString(4);
+                    float sueldo = Float.parseFloat(rs.getString(5));
+                    Repartidor rep= new Repartidor(nombre,cedula,telefono,direc,sueldo);
+                    rep.setId(id);
+                    cola.offer(rep);
+                         
+                }
+          
+            }
+        } catch (SQLException e) {
+            System.out.println("Error en la consulta"+e.getMessage());
+        } finally {
+            try {
+                if (cn != null) {
+                    cn.close();
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.out.println("Error " + e.getMessage());
+            }
+        }
+       
+    }
+        
+    }
+       
+    
+    
+    
+

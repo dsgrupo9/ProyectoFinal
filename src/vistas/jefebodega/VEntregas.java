@@ -16,6 +16,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import modelos.Entrega;
 import modelos.EntregaDomicilio;
+import modelos.EntregaLocal;
 import modelos.Ruta;
 
 /**
@@ -32,7 +33,8 @@ public class VEntregas extends javax.swing.JPanel {
     }
 
     Ruta ruta;
-    LinkedList<Entrega> entregas;
+    LinkedList<Entrega> listaEntregas;
+    ControladorJefeBodega ctrlJefe = new ControladorJefeBodega();
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -119,12 +121,22 @@ public class VEntregas extends javax.swing.JPanel {
         });
 
         bTerminar.setText("Terminar");
+        bTerminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bTerminarActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Buscar Entrega Local: ");
 
         txtLocal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtLocalActionPerformed(evt);
+            }
+        });
+        txtLocal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtLocalKeyReleased(evt);
             }
         });
 
@@ -140,6 +152,11 @@ public class VEntregas extends javax.swing.JPanel {
         txtDomicilio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDomicilioActionPerformed(evt);
+            }
+        });
+        txtDomicilio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDomicilioKeyReleased(evt);
             }
         });
 
@@ -184,7 +201,6 @@ public class VEntregas extends javax.swing.JPanel {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(lCliente)
                                         .addGap(18, 18, 18)))
-                                .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cPedido)
                                     .addComponent(cVenta, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -303,8 +319,30 @@ public class VEntregas extends javax.swing.JPanel {
 
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
         
+          if(cCliente.getText().equals("")&&cVenta.getText().equals("")){
+            Entrega entregaLocal = new EntregaLocal(cDireccion.getText());
+            listaEntregas.add(entregaLocal);
+            ctrlJefe.ingresarEntregaLocal(entregaLocal);
             
+        }else{
+            Entrega entregaDomicilio = new EntregaDomicilio(cDireccion.getText());
+            listaEntregas.add(entregaDomicilio);
+            ctrlJefe.ingresarEntregaDomicilio(entregaDomicilio);
+        }  
     }//GEN-LAST:event_bGuardarActionPerformed
+
+    private void txtLocalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLocalKeyReleased
+        String local=txtLocal.getText();
+        ControladorJefeBodega.buscarEntregaLocal(local);
+    }//GEN-LAST:event_txtLocalKeyReleased
+
+    private void txtDomicilioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDomicilioKeyReleased
+        String dom= txtDomicilio.getText();
+        ControladorJefeBodega.buscarEntegaDom(dom);
+    }//GEN-LAST:event_txtDomicilioKeyReleased
+
+    private void bTerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTerminarActionPerformed
+ruta= new Ruta(listaEntregas);    }//GEN-LAST:event_bTerminarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bGuardar;

@@ -12,8 +12,9 @@ import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 import modelos.Localidad;
 import modelos.singleton.ConexionBaseDatos;
-import vistas.Gerente.AsignarAdmin;
-import vistas.local.VCreacionLocales;
+//import vistas.Gerente.AsignarAdmin;
+import vistas.local.Locales;
+
 
 /**
  *
@@ -56,26 +57,32 @@ public class ControladorGerente {
     
             
     public static void buscarUsuario(String texto) {
-        String[] cols = new String[]{"Usuario", "Nombre", "Cargo", "Localidad"};
+        String[] cols = new String[]{"Usuario", "Nombre","Cedula","Telefono","Direccion", "Sueldo","Cargo"};
+        //Usuario(String nombre, String cedula, String telefono, String direccion, double sueldo)
         DefaultTableModel modelo = new DefaultTableModel(null, cols);
 
         try {
             String filtro = "" + texto + "_%";
-            String sql = "Select u.username,p.nombre,u.cargo,l.descripcion from usuario u  inner join empleado e on e.empleadoid = u.empleadoid"
+            String sql = "Select u.username,p.nombre,p.cedula,p.telefono,p.direccion,e.sueldo, u.cargo from usuario u  inner join empleado e on e.empleadoid = u.empleadoid"
                     + " inner join localidad l on e.localidad =l.localid inner join persona p on e.personaid = p.personaid where u.username like" + '"' + filtro + '"';
             PreparedStatement us = cn.prepareStatement(sql);
             us.setString(1, texto);
             ResultSet res = us.executeQuery();
-            Object datos[] = new Object[4];
+            Object datos[] = new Object[7];
+            
             while (res.next()) {
+                
                 datos[0] = res.getString("username");
                 datos[1] = res.getString("nombre");
-                datos[2] = res.getString("cargo");
-                datos[3] = res.getString("descripcicon");
+                datos[2] = res.getString("cedula");
+                datos[3] = res.getString("telefono");
+                datos[4] = res.getString("direccion");
+                datos[5] = res.getString("sueldo");
+                datos[6] = res.getString("cargo");
 
                 modelo.addRow(datos);
             }
-            AsignarAdmin.gettUsuarios().setModel(modelo);
+            //AsignarAdmin.gettUsuarios().setModel(modelo);
             res.close();
 
         } catch (SQLException e) {
@@ -230,8 +237,9 @@ public class ControladorGerente {
 
                 modelo.addRow(datos);
             }
-            VCreacionLocales.getTablaLocal().setModel(modelo);
             res.close();
+            Locales.getjTablaLocal().setModel(modelo);
+                   
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());

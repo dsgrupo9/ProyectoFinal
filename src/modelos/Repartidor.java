@@ -14,6 +14,7 @@ import java.util.LinkedList;
 public class Repartidor extends Empleado{
     
     //protected LinkedList<Ruta> rutasDeEntrega;
+    protected int id; 
     protected Ruta rutaDeEntrega;
     protected int entregasRealizadas; 
     protected boolean isDisponible ; 
@@ -27,6 +28,10 @@ public class Repartidor extends Empleado{
         this.isDisponible=true;
         this.enable=true;
     }
+
+    
+    
+    
 
 //    public LinkedList<Ruta> getRutasDeEntrega() {
 //        return rutasDeEntrega;
@@ -68,6 +73,14 @@ public class Repartidor extends Empleado{
 
     public void setEnable(boolean enable) {
         this.enable = enable;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
 }

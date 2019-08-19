@@ -11,6 +11,7 @@ package modelos;
  */
 public class Entrega {
     //De aqui debemos heredar las entregas , realcionarlas con lo que queda , creo que debemos corregir algo , mañana hay que hablarlo
+    private static int idEntrega;
     private String direccion; 
     private boolean isExitosa;
     private boolean enable; 
@@ -22,6 +23,14 @@ public class Entrega {
         
     }
 
+     public static int getIdEntrega() {
+        return idEntrega;
+    }
+
+    public void setIdEntrega(int idEntrega) {
+        this.idEntrega = idEntrega;
+    }
+    
     public String getDireccion() {
         return direccion;
     }
