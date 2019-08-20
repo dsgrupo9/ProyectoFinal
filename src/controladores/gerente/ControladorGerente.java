@@ -11,7 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 import modelos.Localidad;
+import modelos.Usuario;
 import modelos.singleton.ConexionBaseDatos;
+import vistas.Gerente.NewVGerente;
 //import vistas.Gerente.AsignarAdmin;
 import vistas.local.Locales;
 
@@ -58,7 +60,7 @@ public class ControladorGerente {
             
     public static void buscarUsuario(String texto) {
         String[] cols = new String[]{"Usuario", "Nombre","Cedula","Telefono","Direccion", "Sueldo","Cargo"};
-        //Usuario(String nombre, String cedula, String telefono, String direccion, double sueldo)
+        //Usuario(String nombre, String cedula, String telefono, String direccion, double sueldo) 
         DefaultTableModel modelo = new DefaultTableModel(null, cols);
 
         try {
@@ -82,6 +84,8 @@ public class ControladorGerente {
 
                 modelo.addRow(datos);
             }
+            
+            NewVGerente.gettUsuarios().setModel(modelo);
             //AsignarAdmin.gettUsuarios().setModel(modelo);
             res.close();
 
@@ -120,14 +124,14 @@ public class ControladorGerente {
     public static String eliminarLocal(Localidad local) {
         String result = null;
         PreparedStatement pst = null;
-        String sql = "UPDATE localidad SET enabled=? WHERE  localid =?";
+        String sql = "UPDATE localidad SET enabled=? WHERE  nombrelocal =?";
         try {
             if (cn != null) {
                 pst = cn.prepareStatement(sql);
                 local.setEnabled(0);
                 pst.setString(1, Integer.toString(local.getEnabled()));
                 //pst.setString(2, clienteVo.getCliente_ID());
-                pst.setString(2, Integer.toString(local.getIdLocal()));
+                pst.setString(2, (local.getNombreLocal()));
                 pst.executeUpdate();
                 if (local.getEnabled()== 1) {
                     result = "Local Habilitado con exito, nombre: " + local.getNombreLocal();
@@ -183,11 +187,13 @@ public class ControladorGerente {
         return result;
     }
     
+    
+    
     public static String ingresarLocal(Localidad local) {
         
         String result = null;
         PreparedStatement pst = null;
-        String sql = "insert into localidad(nombrelocal,descripcion,enabled) values(?,?,?)"; 
+        String sql = "insert into localidad(nombrelocal,descripcion) values(?,?)"; 
         try {
             if (cn != null) {
                 pst = cn.prepareStatement(sql);
@@ -195,7 +201,7 @@ public class ControladorGerente {
                 
                 pst.setString(1, local.getNombreLocal());
                 pst.setString(2, local.getTipoLocalidad());
-                pst.setString(3, Integer.toString(local.getEnabled()));
+                //pst.setString(3, Integer.toString(local.getEnabled()));
                 pst.executeUpdate();
                 
                 result = "Localidad registrada!" ;}
@@ -225,7 +231,7 @@ public class ControladorGerente {
 
         try {
             String filtro = "" + local + "_%";
-            String sql = "Select l.localid, l.nombrelocal,l.descripcion" + '"' + filtro + '"';
+            String sql = "Select l.localid, l.nombrelocal,l.descripcion where l.nombrelocal like"  + '"' + filtro + '"';
             PreparedStatement us = cn.prepareStatement(sql);
             us.setString(1, local);
             ResultSet res = us.executeQuery();
@@ -248,5 +254,34 @@ public class ControladorGerente {
         //return modelo;
 
     }
-    
+        public static String AsignarAdmi(Usuario u) {
+        String result = null;
+        PreparedStatement pst = null;
+        String sql = "UPDATE usuario SET isadmin=? WHERE  username =?";
+        try {
+            if (cn != null) {
+                pst = cn.prepareStatement(sql);
+                pst.setString(1, Integer.toString(u.isIsAdmin()));
+                pst.setString(2, u.getUsuario());
+                pst.executeUpdate();
+                if (u.isIsAdmin()== 1) {
+                    result = "Administrador asignado, nombre: " + u.getUsuario();
+                } else {
+                    result = result = "Admin Denegado : " + u.getUsuario();
+                }
+            }
+        } catch (SQLException e) {
+            result = "Error durante el registro: " + e.getMessage();
+        } finally {
+            try {
+                if (cn != null) {
+                    cn.close();
+                    pst.close();
+                }
+            } catch (Exception e) {
+                result = "Error " + e;
+            }
+        }
+        return result;
+    }
 }

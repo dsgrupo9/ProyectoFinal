@@ -13,20 +13,22 @@ public class Usuario extends Empleado{
     
     protected String usuario; 
     protected String password;
+    protected int isAdmin;
     protected boolean enable;
     
     public Usuario(String nombre, String cedula, String telefono, String direccion, double sueldo) {
         super(nombre, cedula, telefono, direccion, sueldo);
         this.usuario="";
         this.password="";
+        this.isAdmin=0;
         
     }
 
-    public String getUsiuario() {
+    public String getUsuario() {
         return usuario;
     }
 
-    public void setUsiuario(String usuario) {
+    public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
 
@@ -50,14 +52,25 @@ public class Usuario extends Empleado{
     
     public void login(Usuario user){
         System.out.println("HACER LOGIN");
+        System.out.println("aqui debemos hacer la conexion a la base ,");
         
         
     }
     
     public void buscarArticulo(){
         System.out.println("Implementar... ");
+        System.out.println("Los controladores lo tienen implementado ");
        
     }
+
+    public int isIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(int isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+    
     
     
     

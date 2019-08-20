@@ -5,13 +5,16 @@
  */
 package vistas.local;
 
+import controladores.gerente.ControladorGerente;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import modelos.Localidad;
 
 /**
  *
@@ -46,7 +49,7 @@ public class Locales extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         bActualizar = new javax.swing.JButton();
         bIngresar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        bLimpiar = new javax.swing.JButton();
         bEliminar = new javax.swing.JButton();
         bBuscar = new javax.swing.JButton();
 
@@ -65,6 +68,12 @@ public class Locales extends javax.swing.JPanel {
 
         jLabel1.setText("Busqueda");
 
+        cBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cBusquedaKeyReleased(evt);
+            }
+        });
+
         jLabel2.setText("Tipo:");
 
         comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bodega", "Sucursal" }));
@@ -74,17 +83,32 @@ public class Locales extends javax.swing.JPanel {
         bActualizar.setText("Actualizar");
 
         bIngresar.setText("Ingresar");
-
-        jButton3.setText("Limpiar campos");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        bIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                bIngresarActionPerformed(evt);
+            }
+        });
+
+        bLimpiar.setText("Limpiar campos");
+        bLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bLimpiarActionPerformed(evt);
             }
         });
 
         bEliminar.setText("Eliminar");
+        bEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bEliminarActionPerformed(evt);
+            }
+        });
 
         bBuscar.setText("Buscar");
+        bBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -108,7 +132,7 @@ public class Locales extends javax.swing.JPanel {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(cNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(44, 44, 44)
-                                .addComponent(jButton3)))))
+                                .addComponent(bLimpiar)))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(58, 58, 58)
@@ -150,7 +174,7 @@ public class Locales extends javax.swing.JPanel {
                     .addComponent(cNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(bActualizar)
-                    .addComponent(jButton3))
+                    .addComponent(bLimpiar))
                 .addGap(18, 18, 18)
                 .addComponent(bEliminar)
                 .addContainerGap(116, Short.MAX_VALUE))
@@ -168,9 +192,42 @@ public class Locales extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void bLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLimpiarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+        cBusqueda.setText("");
+        cNombre.setText("");
+       
+    }//GEN-LAST:event_bLimpiarActionPerformed
+
+    private void bIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bIngresarActionPerformed
+        // TODO add your handling code here:
+        String local= cNombre.getText();
+        String tipo= (String) comboTipo.getSelectedItem();
+        Localidad lo= new Localidad(tipo,local);
+        String s=ControladorGerente.ingresarLocal(lo);
+        JOptionPane.showMessageDialog(null, s);
+        
+    }//GEN-LAST:event_bIngresarActionPerformed
+
+    private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
+        // TODO add your handling code here:
+          String local= cNombre.getText();
+        String tipo= (String) comboTipo.getSelectedItem();
+        Localidad lo2= new Localidad(tipo,local);
+        String message=ControladorGerente.eliminarLocal(lo2);
+    }//GEN-LAST:event_bEliminarActionPerformed
+
+    private void bBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bBuscarActionPerformed
+
+    private void cBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cBusquedaKeyReleased
+        // TODO add your handling code here:
+        
+        String campo = cBusqueda.getText();
+        ControladorGerente.buscarLocal(campo);
+        
+    }//GEN-LAST:event_cBusquedaKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -178,10 +235,10 @@ public class Locales extends javax.swing.JPanel {
     private javax.swing.JButton bBuscar;
     private javax.swing.JButton bEliminar;
     private javax.swing.JButton bIngresar;
+    private javax.swing.JButton bLimpiar;
     private javax.swing.JTextField cBusqueda;
     private javax.swing.JTextField cNombre;
     private javax.swing.JComboBox<String> comboTipo;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -247,11 +304,11 @@ public class Locales extends javax.swing.JPanel {
     }
 
     public JButton getjButton3() {
-        return jButton3;
+        return bLimpiar;
     }
 
     public void setjButton3(JButton jButton3) {
-        this.jButton3 = jButton3;
+        this.bLimpiar = jButton3;
     }
 
     public JLabel getjLabel1() {

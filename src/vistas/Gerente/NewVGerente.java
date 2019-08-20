@@ -5,12 +5,15 @@
  */
 package vistas.Gerente;
 
+import controladores.gerente.ControladorGerente;
 import controladores.login.ControladorLogin;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.TableModel;
+import modelos.Usuario;
 
 /**
  *
@@ -25,6 +28,16 @@ public class NewVGerente extends javax.swing.JFrame {
     //El ControladorLogin GeneraProblemas
     public NewVGerente() {
         initComponents();
+        /*
+             if(ctrlLogin.isIsAdmin()){
+            bActualizar.setEnabled(true);
+        }else
+            bActualizar.setEnabled(false);
+                /*if(ctrlLogin.isIsAdmin()){
+            bActualizar.setEnabled(true);
+        }else
+        bActualizar.setEnabled(false);*/
+        
         
     }
 
@@ -50,29 +63,30 @@ public class NewVGerente extends javax.swing.JFrame {
         cNombre = new javax.swing.JTextField();
         cCargo = new javax.swing.JTextField();
         cLocal = new javax.swing.JTextField();
-        bIngresar = new javax.swing.JButton();
+        bAsignar = new javax.swing.JButton();
         bActualizar = new javax.swing.JButton();
         bRestablecer = new javax.swing.JButton();
         btnEliminarDatos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tUsuarios.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Usuario ", "Nombre", "Cargo", "Localidad"
+        tUsuarios.setModel(ControladorGerente.MostrarUsuarios()
+        );
+        tUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tUsuariosMouseClicked(evt);
             }
-        ));
+        });
         jScrollPane1.setViewportView(tUsuarios);
 
         jLabel5.setText("Buscar");
 
         cBusqueda.setText("buscar usuario");
+        cBusqueda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cBusquedaActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Usuario");
 
@@ -82,7 +96,12 @@ public class NewVGerente extends javax.swing.JFrame {
 
         jLabel4.setText("Localidad");
 
-        bIngresar.setText("Asignar Usuario");
+        bAsignar.setText("Asignar Usuario");
+        bAsignar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAsignarActionPerformed(evt);
+            }
+        });
 
         bActualizar.setText("Actualizar Datos");
         bActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -92,6 +111,11 @@ public class NewVGerente extends javax.swing.JFrame {
         });
 
         bRestablecer.setText("Limpiar Campos");
+        bRestablecer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bRestablecerActionPerformed(evt);
+            }
+        });
 
         btnEliminarDatos.setText("Eliminar Datos");
         btnEliminarDatos.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +146,7 @@ public class NewVGerente extends javax.swing.JFrame {
                                     .addComponent(cCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(82, 82, 82)
-                                .addComponent(bIngresar))
+                                .addComponent(bAsignar))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -162,7 +186,7 @@ public class NewVGerente extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(bIngresar)
+                            .addComponent(bAsignar)
                             .addComponent(bActualizar))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -187,21 +211,62 @@ public class NewVGerente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEliminarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarDatosActionPerformed
-        /*if(ctrlLogin.isIsAdmin()){
-            bActualizar.setEnabled(true);
-        }else
-        bActualizar.setEnabled(false);*/
+
     }//GEN-LAST:event_btnEliminarDatosActionPerformed
 
     private void bActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bActualizarActionPerformed
         // TODO add your handling code here:
         /*
-        if(ctrlLogin.isIsAdmin()){
-            bActualizar.setEnabled(true);
-        }else
-            bActualizar.setEnabled(false);
+   
         */
     }//GEN-LAST:event_bActualizarActionPerformed
+
+    private void cBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBusquedaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cBusquedaActionPerformed
+
+    private void tUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tUsuariosMouseClicked
+        // TODO add your handling code here:
+        int indice=tUsuarios.getSelectedRow();
+        TableModel model = tUsuarios.getModel();
+        String usuario= model.getValueAt(indice, 0).toString();
+        String nombre= model.getValueAt(indice, 1).toString();
+        String cargo= model.getValueAt(indice, 2).toString();
+        String local= model.getValueAt(indice, 3).toString();
+        
+        cUsuario.setText(usuario);
+        cNombre.setText(nombre);
+        cCargo.setText(cargo);
+        cLocal.setText(local);
+        
+        
+        
+    }//GEN-LAST:event_tUsuariosMouseClicked
+
+    private void bAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAsignarActionPerformed
+        // TODO add your handling code here: no quiero hacer estooooo, me voy a morir weeeeee
+        String usuario=cUsuario.getText();
+        String nombre=cNombre.getText();
+        String cargo=cCargo.getText();
+        String local=cLocal.getText();
+        Usuario u= new Usuario(nombre,"","","",0);
+        u.setUsuario(usuario);
+        u.setIsAdmin(0);
+        
+        
+        
+         
+        
+    }//GEN-LAST:event_bAsignarActionPerformed
+
+    private void bRestablecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRestablecerActionPerformed
+        // TODO add your handling code here:
+        cBusqueda.setText("Buscar usuario");
+        cUsuario.setText("");
+        cNombre.setText("");
+        cLocal.setText("");
+        cCargo.setText("");
+    }//GEN-LAST:event_bRestablecerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,7 +305,7 @@ public class NewVGerente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bActualizar;
-    private javax.swing.JButton bIngresar;
+    private javax.swing.JButton bAsignar;
     private javax.swing.JButton bRestablecer;
     private javax.swing.JButton btnEliminarDatos;
     private javax.swing.JTextField cBusqueda;
@@ -265,11 +330,11 @@ public class NewVGerente extends javax.swing.JFrame {
     }
 
     public JButton getbIngresar() {
-        return bIngresar;
+        return bAsignar;
     }
 
     public void setbIngresar(JButton bIngresar) {
-        this.bIngresar = bIngresar;
+        this.bAsignar = bIngresar;
     }
 
     public JButton getbRestablecer() {
